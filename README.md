@@ -22,7 +22,7 @@
 You can use composer to install this library from the command line.
 
 ```bash
-composer require sinacms/mutilprocessing
+composer require sinacms/multiprocess
 ```   
 
 ## Usage
@@ -34,7 +34,7 @@ composer require sinacms/mutilprocessing
 
 use Mutilprocessing\Async;
 
-Mutilprocessing\Async::create()->run('task.php', ['runTest'.$i]);
+Async::create()->run('task.php', ['runTest'.$i]);
 ```
 
 ### sync wait for all process end
@@ -45,7 +45,7 @@ Mutilprocessing\Async::create()->run('task.php', ['runTest'.$i]);
 
 use Mutilprocessing\Async;
 
-Mutilprocessing\Async::join(function($code, $out, $err) use(&$outData) {
+Async::join(function($code, $out, $err) use(&$outData) {
 //    var_dump($code, $out, $err);
     $outData = $out;
 });
@@ -59,7 +59,7 @@ Mutilprocessing\Async::join(function($code, $out, $err) use(&$outData) {
 
 use Mutilprocessing\Async;
 
-Mutilprocessing\Async::discard();
+Async::discard();
 ```
 
 

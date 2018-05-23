@@ -1,0 +1,21 @@
+{
+  "name" : "sinacms/multiprocess",
+  "description": "a tool for PHP multi process asynchronous tasks manage",
+  "keywords": ["PHP", "async", "multi process", "asynchronous"],
+  "license" : "Apache-2.0",
+  "type": "library",
+  "authors": [
+    {
+      "name": "george wu",
+      "email": "sunsky303@gmail.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {
+    "phpunit/phpunit": "~4.0"
+  },
+  "autoload": {
+    "psr-4": { "Mutilprocessing\\": "src/" }
+  },
+  "minimum-stability": "dev"
+}

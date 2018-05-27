@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: root
+ * User: shixi_qingzhe
  * Date: 18/5/23
  * Time: 下午4:39
  */
@@ -15,10 +15,10 @@ require_once __DIR__ . '/bootstrap.php';
 class AsyncTest extends \PHPUnit_Framework_TestCase {
     public function testAsync()
     {
-        Async::create()->run('task.php', ['run测试']);
+        Async::create()->start('task.php', ['run测试']);
 
         $outData = [];
-        Async::join(function($code, $out, $err) use(&$outData) {
+        Async::wait(function($code, $out, $err) use(&$outData) {
             $outData = $out;
         });
         var_dump($outData);

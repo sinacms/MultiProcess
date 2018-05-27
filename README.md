@@ -37,6 +37,24 @@ use Mutilprocessing\Async;
 Async::create()->run('task.php', ['runTest'.$i]);
 ```
 
+### distribute tasks by a simple function and async execute
+
+```php
+<?php
+
+use Mutilprocessing\Async;
+
+Async::create()->startFunc(function($param1, $param2) {
+    echo $param1.$param2.PHP_EOL;
+}, ['param1' => 'hello', 'param2' => ' world'])
+
+$func = function ($param1, $param2) {
+    echo "this is an another func";
+};
+
+Async::create()->startFunc($func, ['param1' => 'hello', 'param2' => ' PHP']); 
+```
+
 ### sync wait for all process end
 
 
@@ -50,6 +68,17 @@ Async::join(function($code, $out, $err) use(&$outData) {
     $outData = $out;
 });
 
+```
+
+### getArgs passed from Async::start
+
+```php
+// please pass $argv[1] to get args
+<?php
+
+use Mutilprocessing\Async;
+
+Async::getArgs($argv[1]);
 ```
 
 ### clean all task

@@ -96,9 +96,11 @@ Async::discard();
   * ### Async
    * ### option shorthand
   * public static function create()
-  * public static function run($scriptname, $args, $envs = [])
+  * public static function start($scriptname, $args, $envs = [])
+  * public function startFunc(callable $function, $args = [])
   * public static function discard()
-  * public static function join(callable $logHandler = null)
+  * public static function wait(callable $logHandler = null)
+  * public static function getArgs($argv = null)
 
 
 

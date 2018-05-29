@@ -32,6 +32,8 @@ $func = function ($test1, $test2)
     echo "hello";
 }, ['test1' => 'KZ', 'test2' => ' RNG']);
 
+\Mutilprocessing\Async::create()->startFunc($func, ['test1' => 'KZ', 'test2' => ' RNG']);
+
 
 \Mutilprocessing\Async::wait(function ($code, $out, $err) use (&$outData) {
     var_dump($out);

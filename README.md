@@ -1,6 +1,6 @@
 # PHP Mutilprocessing
 
-    This is high performance PHP Mutilprocessing Task Manager written in PHP.
+    This is high performance PHP Mutilprocessing Task Manager written in PHP, compatible with PHP-FPM and CLI.
 	
 
 ## Contents

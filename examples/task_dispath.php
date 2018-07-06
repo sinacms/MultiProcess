@@ -10,31 +10,40 @@ require_once __DIR__ .'/bootstrap.php';
 
 $func = function ($test1, $test2)
 {
+    return "return 777";
+};
+
+$func2 = function ($test1, $test2)
+{
     echo $test1.$test2;
-    echo PHP_EOL."666";
-    echo PHP_EOL."777";
-    echo PHP_EOL."888";
-    echo PHP_EOL."999";
-    if ($test2) {
-        echo "this is if";
+
+    if (false) {
+        echo "6666";
+    } else {
+        echo "as65d4";
     }
 
-    for ($i = 1;$i < 10;$i++) {
-        echo $i;
-    }
-    echo PHP_EOL."999";
-    echo PHP_EOL."999";
-    echo PHP_EOL."999";
+    return "return 666";
+
 
 };
 
-\Mutilprocessing\Async::create()->startFunc(function () {
-    echo "hello";
-}, ['test1' => 'KZ', 'test2' => ' RNG']);
+$func1 = function ($test1, $test2)
+{
+    echo $test1.$test2;
 
-\Mutilprocessing\Async::create()->startFunc($func, ['test1' => 'KZ', 'test2' => ' RNG']);
+    echo "return 888";
+};
 
+\Mutilprocessing\Async::create()->startFunc($func2, ['test1' => 'SKT', 'test2' => ' RW']);
+\Mutilprocessing\Async::create()->startFunc($func, ['test1' => 'SKT', 'test2' => ' RW']);
 
+$outData = [];
 \Mutilprocessing\Async::wait(function ($code, $out, $err) use (&$outData) {
-    var_dump($out);
+    if (strlen($err) != 0) {
+        print_r($err);
+    }
+    array_push($outData, \Mutilprocessing\Async::getReturn($out));
 });
+
+var_dump($outData);

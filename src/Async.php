@@ -124,6 +124,15 @@ class Async
         return json_decode(base64_decode($argv), 1);
     }
 
+    public static function getReturn($return)
+    {
+        $returns = explode("&&&", $return);
+        return [
+            'echos' => $returns[0],
+            'returns' => isset($returns[1]) ? base64_decode($returns[1]) : null
+            ];
+    }
+
 
 }
 

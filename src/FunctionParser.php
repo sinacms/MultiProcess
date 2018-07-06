@@ -27,21 +27,25 @@ class FunctionParser
         $headPtr = 0;
         $footPtr = 0;
         $codeBlockStr = implode('', $codeBlock);
-        $i = 0;$j = strlen($codeBlockStr) - 1;
+        $i = 0;
+        $j = strlen($codeBlockStr) - 1;
         while($i <= $j) {
-            if ($headFound == true && $footFound = true) {
+            if ($headFound == true && $footFound == true) {
                 break;
             }
             if ($codeBlockStr[$i] == "{") {
                 $headPtr = $i;
                 $headFound = true;
+            } else {
+                $i++;
+
             }
-            $i++;
             if ($codeBlockStr[$j] == "}") {
                 $footPtr = $j;
                 $footFound = true;
+            } else {
+                $j--;
             }
-            $j--;
         }
         $codeBlockStrReal = substr($codeBlockStr, $headPtr + 1, $footPtr - $headPtr - 1);
         return $codeBlockStrReal;

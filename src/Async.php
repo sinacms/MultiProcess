@@ -3,7 +3,9 @@
 namespace Mutilprocessing;
 
 require_once __DIR__ . '/FunctionParser.php';
+require_once __DIR__ . '/Exception/FileNotFoundException.php';
 
+use Mutilprocessing\Exception\FileNotFoundException;
 use Mutilprocessing\FunctionParser;
 
 class Async
@@ -48,6 +50,10 @@ class Async
             $cwd = __DIR__;
         } else {
             $cwd = '.';
+            // judge if file exists
+            if (!is_file($scriptname)) {
+                throw new FileNotFoundException($scriptname." is not found");
+            }
         }
         if ($args == []) {
             $argsStr = '';

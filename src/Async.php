@@ -120,14 +120,19 @@ class Async
      * @param null $argv <p>
      * Be sure to import $argv[1] to get the parameters of script execution.
      * </p>
-     * @return mixed|null
+     * @return mixed if key is null or sth can found in params | null if no args input | false If there is no corresponding key here
      */
-    public static function getArgs($argv = null)
+    public static function getArgs($argv = null, $key = null)
     {
         if ($argv == null) {
             return null;
         }
-        return json_decode(base64_decode($argv), 1);
+        $params = json_decode(base64_decode($argv), 1);
+        if ($key == null) {
+            return $params;
+        }
+        return isset($params[$key]) ? $params[$key] : false;
+
     }
 
     public static function getReturn($return)

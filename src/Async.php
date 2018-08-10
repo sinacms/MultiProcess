@@ -4,8 +4,10 @@ namespace Mutilprocessing;
 
 require_once __DIR__ . '/FunctionParser.php';
 require_once __DIR__ . '/Exception/FileNotFoundException.php';
+require_once __DIR__ . '/Exception/PHPBinNotFoundException.php';
 
 use Mutilprocessing\Exception\FileNotFoundException;
+use Mutilprocessing\Exception\PHPBinNotFoundException;
 use Mutilprocessing\FunctionParser;
 
 class Async
@@ -43,16 +45,16 @@ class Async
      * @param array $args <p>
      * Input you want to execute the required parameters in function
      * </p>
+     * @param string $phpBin You can specify the PHP path for asynchronous execution scripts.
      * @param array $envs
      * @return $this
      */
-    public function start($scriptname, $args = [], $envs = [])
+    public function start($scriptname, $args = [], $phpBin = null, $envs = [])
     {
         if ($scriptname == 'callbackStub.php') {
             $cwd = __DIR__;
         } else {
             $cwd = '.';
-            // judge if file exists
             if (!is_file($scriptname)) {
                 throw new FileNotFoundException($scriptname." is not found");
             }
@@ -62,9 +64,18 @@ class Async
         } else {
             $argsStr = escapeshellarg(base64_encode(json_encode($args)));
         }
+        if ($phpBin !== null && is_string($phpBin)) {
+            // check if php-bin is validate
+            if (!is_file($phpBin)) {
+                throw new PHPBinNotFoundException("PHP Binary :".$phpBin."is not found");
+            }
+            $cmd = "{$phpBin} {$scriptname} '$argsStr' & ";
+        } else {
+            $cmd = "php $scriptname '$argsStr' & ";
+        }
         $this -> argStr = $argsStr;
         $this->proccess = proc_open(
-            "php $scriptname '$argsStr' & ",
+            $cmd,
             array(
                 0 => array('pipe', 'r'), //stdin (用fwrite写入数据给管道)
                 1 => array('pipe', 'w'), //stdout(用stream_get_contents获取管道输出)
@@ -87,11 +98,11 @@ class Async
      * Input you want to execute the required parameters in function
      * </p>
      */
-    public function startFunc(callable $function, $args = [])
+    public function startFunc(callable $function, $args = [], $phpBin = null)
     {
         $funcBody = FunctionParser::genTmp($function);
         $args['body'] = $funcBody;
-        $this -> start('callbackStub.php', $args);
+        $this -> start('callbackStub.php', $args, $phpBin);
     }
 
     /**

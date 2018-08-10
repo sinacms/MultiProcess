@@ -20,6 +20,10 @@
 
  - can get callable function return value
  
+ - You can specify the PHP path for asynchronous execution scripts by specifying the phpBin parameter.
+ 
+ - Exception Handling
+ 
 ## Installation
 You can use composer to install this library from the command line.
 
@@ -36,7 +40,7 @@ composer require sinacms/multiprocess
 
 use Mutilprocessing\Async;
 
-Async::create()->run('task.php', ['runTest'.$i]);
+Async::create()->start('task.php', ['runTest'.$i]);
 ```
 
 ### distribute tasks by a simple function and async execute
@@ -50,7 +54,7 @@ use Mutilprocessing\Async;
 
 Async::create()->startFunc(function($param1, $param2) {
     echo $param1.$param2.PHP_EOL;
-}, ['param1' => 'hello', 'param2' => ' world'])
+}, ['param1' => 'hello', 'param2' => ' world']);
 
 $func = function ($param1, $param2) {
     echo "this is an another func";
@@ -147,8 +151,8 @@ Async::discard();
   * ### Async
    * ### option shorthand
   * public static function create()
-  * public static function start($scriptname, $args, $envs = [])
-  * public function startFunc(callable $function, $args = [])
+  * public static function start($scriptname, $args, $phpBin="", $envs = [])
+  * public function startFunc(callable $function, $args = [], $phpBin="")
   * public static function discard()
   * public static function wait(callable $logHandler = null)
   * public static function getArgs($argv = null)
@@ -158,7 +162,7 @@ Async::discard();
   * public static function genTmp(callable $function)
   
   
-## Plan
+## Todo
   * regCallback for each execution (on process)
   * add multi execution unit and start once
 

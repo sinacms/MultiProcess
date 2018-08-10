@@ -1,4 +1,4 @@
-# PHP Mutilprocessing
+# PHP Mutilprocess
 
     This is high performance PHP Mutilprocessing Task Manager written in PHP, compatible with PHP-FPM and CLI.
 	
@@ -67,7 +67,7 @@ Async::create()->startFunc($func, ['param1' => 'hello', 'param2' => ' PHP']);
 
 use Mutilprocessing\Async;
 $outData = [];
-Async::join(function($code, $out, $err) use(&$outData) {
+Async::wait(function($code, $out, $err) use(&$outData) {
 //    var_dump($code, $out, $err);
 //  you can handle code runtime exception like this
 	 if (strlen($err) != 0) {
@@ -129,7 +129,7 @@ array(4) {
 
 use Mutilprocessing\Async;
 
-Async::getArgs($argv[1]);
+Async::getArgs($argv[1], 'key');
 ```
 
 ### clean all task

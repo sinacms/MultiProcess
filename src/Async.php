@@ -135,6 +135,12 @@ class Async
 
     }
 
+
+    /**
+     * Get output and return values
+     * @param $return
+     * @return array
+     */
     public static function getReturn($return)
     {
         $returns = explode("&&&", $return);

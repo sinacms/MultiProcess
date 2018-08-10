@@ -156,6 +156,11 @@ Async::discard();
   * ### FunctionParser
    * ### option shorthand
   * public static function genTmp(callable $function)
+  
+  
+## Plan
+  * regCallback for each execution (on process)
+  * add multi execution unit and start once
 
 
 

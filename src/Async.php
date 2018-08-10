@@ -16,6 +16,8 @@ class Async
 
     protected $proccess;
 
+    protected $logHandler;
+
     /**
      * Create a Async object
      * @return Async
@@ -149,6 +151,15 @@ class Async
             'returns' => isset($returns[1]) ? base64_decode($returns[1]) : null
             ];
     }
+
+    // todo Register callback function
+
+    public function regCallback(callable $callback)
+    {
+
+    }
+
+    // todo add multi async execution like add()->add()->start();
 
 
 }

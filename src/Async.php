@@ -46,15 +46,18 @@ class Async
      * Input you want to execute the required parameters in function
      * </p>
      * @param string $phpBin You can specify the PHP path for asynchronous execution scripts.
+     * @param $cwd where to exec script
      * @param array $envs
      * @return $this
      */
-    public function start($scriptname, $args = [], $phpBin = null, $envs = [])
+    public function start($scriptname, $args = [], $cwd = null, $phpBin = null, $envs = [])
     {
         if ($scriptname == 'callbackStub.php') {
             $cwd = __DIR__;
         } else {
-            $cwd = '.';
+            if ($cwd === null) {
+                $cwd = '.';
+            }
             if (!is_file($scriptname)) {
                 throw new FileNotFoundException($scriptname." is not found");
             }
@@ -171,7 +174,5 @@ class Async
     }
 
     // todo add multi async execution like add()->add()->start();
-
-
 }
 

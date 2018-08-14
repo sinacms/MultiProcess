@@ -1,7 +1,7 @@
 # PHP Mutilprocess
 
     This is high performance PHP Mutilprocessing Task Manager written in PHP, compatible with PHP-FPM and CLI.
-	
+    这是一个用PHP编写的高性能PHP多进程异步任务管理器，与PHP FPM和CLI兼容。
 
 ## Contents
 
